@@ -37,5 +37,5 @@ Custom Print outs for JMD
         # "print/report_payment_receipt.xml",
     ],
     "demo": [],
-    "installable": True,
+    "installable": False,
 }
