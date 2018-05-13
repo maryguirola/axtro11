@@ -2,7 +2,7 @@
 <openerp>
 <data>
 <template id="report_invoice_document_jmd">
-    <t t-call="axtro_print.external_layout_no_signature">
+    <t t-call="web.external_layout">
 
         <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
         <div class="page">
@@ -159,9 +159,9 @@
 </template>
 
 
-<template id="report_invoice" inherit_id="account.report_invoice">
+<template id="report_invoice_with_payments" inherit_id="account.report_invoice_with_payments">
 
-    <xpath expr="//t[@t-call='account.report_invoice_document']" position="replace">
+    <xpath expr="//t[@t-call='account.report_invoice_document_with_payments']" position="replace">
         <t t-call="axtro_print.report_invoice_document_jmd" t-lang="o.partner_id.lang"/>
     </xpath>
 

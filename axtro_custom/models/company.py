@@ -7,3 +7,4 @@ class JmdResCompany(models.Model):
 
     jmd_footer_logo = fields.Binary(string='Footer logo')
     jmd_header_logo = fields.Binary(string='Header logo')
+    fax = fields.Char('Fax')
