@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account_invoice_form_jmd">
+            <field name="name">account.invoice.form.jmd</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+
+                <!--Create a shipping address-->
+                <field  name="partner_id" position="after">
+                        <field string="Shipping Address" name="jmd_partner_shipping_id"
+                            context="{'search_default_customer':1, 'show_address': 1}"
+                            options='{"always_reload": True}'
+                            domain="[('customer', '=', True)]"/>
+                </field>
+
+                <!--Create tick box to disable the printing of the discount on the invoice-->
+                <field name="payment_term_id" position="replace">
+                    <field name="payment_term_id" required="1"/>
+                    <field name="jmd_nodiscount" invisible="1"/>
+                    <field name="jmd_print_barcode" invisible="1"/>
+                    <field name="jmd_po_number"/>
+                </field>
+
+                <!--Add barcode on tree view of the invoice_line-->
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="after">
+                    <field name="jmd_product_barcode"/>
+                </xpath>
+            </field>
+
+        </record>
+
+        <record model="ir.ui.view" id="account_invoice_tree_jmd">
+            <field name="name">account.invoice.tree.jmd</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="jmd_po_number"/>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>
