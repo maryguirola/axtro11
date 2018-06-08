@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="company_form_jmd" model="ir.ui.view">
+        <field name="name">jmd.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field eval="12" name="priority"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="phone" position="after">
+                    <field name="fax"/>
+                </field>
+
+                <notebook position="inside">
+                    <page name="logos" string="Logos">
+                        <field name="jmd_header_logo" widget="image"/>
+                        <field name="jmd_footer_logo" widget="image"/>
+                    </page>
+                </notebook>
+
+            </data>
+        </field>
+    </record>
+</odoo>
