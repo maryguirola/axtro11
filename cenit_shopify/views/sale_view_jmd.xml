@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_order_form_jmd" model="ir.ui.view">
+            <field name="name">sale.order.form.jmd</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <field name="payment_term_id" position="replace">
+                    <field name="payment_term_id" options="{'no_create': True}" required="1"/>
+                    <field name="jmd_po_number_so"/>
+                    <field name="jmd_nodiscount_so" invisible="1"/>
+                    <field name="jmd_print_barcode" invisible="1"/>
+                </field>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                    <field name="jmd_product_barcode"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>
