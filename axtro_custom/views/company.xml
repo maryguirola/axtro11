@@ -6,12 +6,19 @@
         <field name="inherit_id" ref="base.view_company_form"/>
         <field eval="12" name="priority"/>
         <field name="arch" type="xml">
-            <notebook position="inside">
-                <page name="logos">
-                    <field name="jmd_header_logo" widget="image"/>
-                    <field name="jmd_footer_logo" widget="image"/>
-                </page>
-            </notebook>
+            <data>
+                <field name="phone" position="after">
+                    <field name="fax"/>
+                </field>
+
+                <notebook position="inside">
+                    <page name="logos" string="Logos">
+                        <field name="jmd_header_logo" widget="image"/>
+                        <field name="jmd_footer_logo" widget="image"/>
+                    </page>
+                </notebook>
+
+            </data>
         </field>
     </record>
 </odoo>

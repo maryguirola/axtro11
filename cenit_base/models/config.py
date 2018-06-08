@@ -22,11 +22,12 @@
 #
 #
 
-import json
 import logging
-
 import requests
+import json
+
 from odoo import models, fields, exceptions
+
 
 _logger = logging.getLogger(__name__)
 
@@ -44,43 +45,43 @@ class CenitSettings(models.TransientModel):
 
     module_cenit_desk = fields.Boolean('Desk API',
                                        help=""
-                                       )
+    )
 
     module_cenit_mailchimp = fields.Boolean('Mailchimp API',
                                             help=""
-                                            )
+    )
 
     module_cenit_mandrill = fields.Boolean('Mandrill API',
                                            help=""
-                                           )
+    )
 
     module_cenit_shipstation = fields.Boolean('Shipstation API',
                                               help=""
-                                              )
+    )
 
     module_cenit_shipwire = fields.Boolean('Shipwire API',
                                            help=""
-                                           )
+    )
 
     module_cenit_slack = fields.Boolean('Slack API',
                                         help=""
-                                        )
+    )
 
     module_cenit_twilio = fields.Boolean('Twilio API',
                                          help=""
-                                         )
+    )
 
     module_cenit_twitter = fields.Boolean('Twitter API',
                                           help=""
-                                          )
+    )
 
     module_cenit_asana = fields.Boolean('Asana API',
                                         help=""
-                                        )
+    )
 
     module_cenit_messagebird = fields.Boolean('MessageBird API',
                                               help=""
-                                              )
+    )
 
     ############################################################################
     # Default values getters
@@ -103,6 +104,7 @@ class CenitSettings(models.TransientModel):
 
         return {'cenit_user_token': cenit_user_token or False}
 
+
     ############################################################################
     # Values setters
     ############################################################################
@@ -112,16 +114,16 @@ class CenitSettings(models.TransientModel):
         cenit_url = config_parameters.search([('key', '=', 'odoo_cenit.cenit_url')]).value
 
         config_parameters.set_param("odoo_cenit.cenit_url",
-                                    cenit_url or '')
+                                        cenit_url or '')
 
         for record in self.browse(self.ids):
             config_parameters.set_param("odoo_cenit.cenit_user_key",
                                         record.cenit_user_key or ''
-                                        )
+            )
         for record in self.browse(self.ids):
             config_parameters.set_param("odoo_cenit.cenit_user_token",
-                                        record.cenit_user_token or ''
-                                        )
+                                         record.cenit_user_token or ''
+            )
 
     # def set_values_cenit_user_key(self):
     #     config_parameters = self.env["ir.config_parameter"]
@@ -210,7 +212,7 @@ class CenitSettings(models.TransientModel):
         role_data = {
             "namespace": namesp[0]['id'],
             "name": "My Odoo role",
-            # "connections": [(6, False, [conn['id']])],
+            #"connections": [(6, False, [conn['id']])],
             "webhooks": [(6, False, [hook['id']])],
         }
         role = role_pool.create(role_data)
@@ -359,3 +361,4 @@ class CenitAccountSettings(models.TransientModel):
 
         hub = self.env['cenit.hub.settings']
         hub.sync_with_cenit()
+

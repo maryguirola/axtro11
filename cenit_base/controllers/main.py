@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import logging
+_logger = logging.getLogger(__name__)
+try:
+    import inflect
+except ImportError as err:
+    _logger.debug(err)
 
-import inflect
-from odoo import SUPERUSER_ID
 from odoo import http
+from odoo import SUPERUSER_ID
 from odoo.http import request
 from odoo.modules.registry import Registry
-
-_logger = logging.getLogger(__name__)
 
 
 class WebhookController(http.Controller):

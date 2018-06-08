@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
-import json
-import logging
 import re
+import logging
+import json
 
 from odoo import models, api
-
 # This imports is for mapping purpose
+from datetime import datetime
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
 _logger = logging.getLogger(__name__)
 re_key = re.compile("\\{(.*?)\\}")
-
 
 class CenitSerializer(models.TransientModel):
     _name = 'cenit.serializer'
@@ -23,7 +23,6 @@ class CenitSerializer(models.TransientModel):
                 if not obj:
                     return None
                 return checker(obj)
-
             return _do_check
 
         def _dummy(obj):

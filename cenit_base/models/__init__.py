@@ -23,10 +23,12 @@
 #
 
 from . import cenit_api
+
 from . import config
 from . import data_definitions
-from . import handler
-from . import import_export
-from . import installer
-from . import serializer
 from . import setup
+
+from . import serializer
+from . import handler
+from . import installer
+from . import import_export

@@ -22,14 +22,17 @@
 #
 #
 
+from odoo import models, fields, api, exceptions
+
+from datetime import datetime
+
 import logging
 
-from odoo import models, fields, api
 
 _logger = logging.getLogger(__name__)
 
 
-class CenitConnection(models.Model):
+class CenitConnection (models.Model):
     _name = 'cenit.connection'
     _inherit = 'cenit.api'
 
@@ -39,7 +42,7 @@ class CenitConnection(models.Model):
     cenitID = fields.Char('Cenit ID')
 
     namespace = fields.Many2one('cenit.namespace', string='Namespace',
-                                ondelete='cascade')
+                               ondelete='cascade')
 
     name = fields.Char('Name', required=True)
     url = fields.Char('URL', required=True)
@@ -133,7 +136,7 @@ class CenitConnection(models.Model):
     @api.model
     def create(self, vals):
         if not isinstance(vals['namespace'], int):
-            vals['namespace'] = vals['namespace']['id']
+           vals['namespace'] = vals['namespace']['id']
         obj = super(CenitConnection, self).create(vals)
 
         if obj and obj.cenitID and not self.env.context.get('local', False):
@@ -142,7 +145,7 @@ class CenitConnection(models.Model):
         return obj
 
 
-class CenitConnectionRole(models.Model):
+class CenitConnectionRole (models.Model):
     _name = 'cenit.connection.role'
     _inherit = 'cenit.api'
 
@@ -152,7 +155,7 @@ class CenitConnectionRole(models.Model):
     cenitID = fields.Char('Cenit ID')
 
     namespace = fields.Many2one('cenit.namespace', string='Namespace',
-                                ondelete='cascade')
+                              ondelete='cascade')
 
     name = fields.Char('Name', required=True)
 
@@ -214,7 +217,7 @@ class CenitConnectionRole(models.Model):
         return vals
 
 
-class CenitParameter(models.Model):
+class CenitParameter (models.Model):
     _name = 'cenit.parameter'
 
     key = fields.Char('Key', required=True)
@@ -251,7 +254,7 @@ class CenitParameter(models.Model):
     )
 
 
-class CenitWebhook(models.Model):
+class CenitWebhook (models.Model):
 
     @api.depends('method')
     def _compute_purpose(self):
@@ -268,7 +271,7 @@ class CenitWebhook(models.Model):
     cenitID = fields.Char('Cenit ID')
 
     namespace = fields.Many2one('cenit.namespace', string='Namespace',
-                                ondelete='cascade')
+                              ondelete='cascade')
     name = fields.Char('Name', required=True)
     path = fields.Char('Path', required=True)
     purpose = fields.Char(compute='_compute_purpose', store=True)
@@ -349,11 +352,11 @@ class CenitWebhook(models.Model):
     @api.model
     def create(self, vals):
         if not isinstance(vals['namespace'], int):
-            vals['namespace'] = vals['namespace']['id']
+           vals['namespace'] = vals['namespace']['id']
         return super(CenitWebhook, self).create(vals)
 
 
-class CenitEvent(models.Model):
+class CenitEvent (models.Model):
     _name = "cenit.event"
     _inherit = "cenit.api"
 
@@ -362,7 +365,7 @@ class CenitEvent(models.Model):
 
     cenitID = fields.Char('CenitID')
     namespace = fields.Many2one('cenit.namespace', string='Namespace',
-                                ondelete='cascade')
+                              ondelete='cascade')
 
     name = fields.Char('Name', required=True, unique=True)
     type_ = fields.Selection(
@@ -383,10 +386,12 @@ class CenitEvent(models.Model):
     )
     schema = fields.Many2one('cenit.schema', string='Schema')
 
+
     _sql_constraints = [
         ('name_uniq', 'UNIQUE(namespace, name)',
          'The name must be unique for each namespace!')
     ]
+
 
     @api.one
     def _get_values(self):
@@ -424,7 +429,7 @@ class CenitEvent(models.Model):
         return update
 
 
-class CenitTranslator(models.Model):
+class CenitTranslator (models.Model):
     _name = "cenit.translator"
     _inherit = "cenit.api"
 
@@ -433,11 +438,12 @@ class CenitTranslator(models.Model):
 
     cenitID = fields.Char('CenitID')
     namespace = fields.Many2one('cenit.namespace', string='Namespace',
-                                ondelete='cascade')
+                              ondelete='cascade')
     name = fields.Char('Name', required=True, unique=True)
     type_ = fields.Char("Type")
     mime_type = fields.Char('MIME Type')
     schema = fields.Many2one('cenit.schema', string='Schema')
+
 
     _sql_constraints = [
         ('name_uniq', 'UNIQUE(namespace, name)',
@@ -445,7 +451,8 @@ class CenitTranslator(models.Model):
     ]
 
 
-class CenitFlow(models.Model):
+class CenitFlow (models.Model):
+
     _name = "cenit.flow"
     _inherit = 'cenit.api'
 
@@ -455,7 +462,7 @@ class CenitFlow(models.Model):
     cenitID = fields.Char('Cenit ID')
 
     namespace = fields.Many2one('cenit.namespace', string='Namespace',
-                                ondelete='cascade')
+                              ondelete='cascade')
 
     name = fields.Char('Name', size=64, required=True, unique=True)
     enabled = fields.Boolean('Enabled', default=True)
@@ -502,7 +509,7 @@ class CenitFlow(models.Model):
 
     _sql_constraints = [
         ('name_uniq', 'UNIQUE(namespace, name)',
-         'The name must be unique for each namespace!')
+        'The name must be unique for each namespace!')
     ]
 
     @api.one
@@ -664,7 +671,7 @@ class CenitFlow(models.Model):
         )
 
         conn = self.connection_role.connections and \
-               self.connection_role.connections[0]
+            self.connection_role.connections[0]
         my_conn = conn.url == my_url
 
         rc = {
@@ -692,7 +699,7 @@ class CenitFlow(models.Model):
                 (self.env.context.get('local'), False)
 
         if not isinstance(vals['namespace'], int):
-            vals['namespace'] = vals['namespace']['id']
+           vals['namespace'] = vals['namespace']['id']
 
         obj = super(CenitFlow, self).create(vals)
         # if not local:
@@ -750,6 +757,7 @@ class CenitFlow(models.Model):
 
         if not flows:
             return res
+
 
         data_types = set()
         for flow in flows:
@@ -932,15 +940,15 @@ class CenitFlow(models.Model):
     @api.one
     def _send(self, data):
         method = "http_post"
-        #         if local:
-        #             method = "local_http"
+#         if local:
+#             method = "local_http"
         return getattr(self, method)(data)
 
     @api.one
     def http_post(self, data):
         path = "/%s/%s" % (self.schema.namespace.slug, self.schema.slug,)
 
-        # root = self.schema.slug
+        #root = self.schema.slug
         # if isinstance(root, list):
         #     root = root[0]
         values = data[0]

@@ -19,11 +19,12 @@
 #
 ##############################################################################
 
+import requests
 import json
 import logging
 
-import requests
 from odoo import models, api, exceptions
+
 
 _logger = logging.getLogger(__name__)
 
@@ -68,8 +69,7 @@ class CenitApi(models.AbstractModel):
             self.cenit_model: vals
         }
         if 'namespace' in values[self.cenit_model] and isinstance(values[self.cenit_model]['namespace'], int):
-            values[self.cenit_model]['namespace'] = \
-            self.env['cenit.namespace'].search([('id', '=', vals['namespace'])])['name']
+            values[self.cenit_model]['namespace'] = self.env['cenit.namespace'].search([('id', '=', vals['namespace'])])['name']
         rc = False
         try:
             rc = self.post(path, values)

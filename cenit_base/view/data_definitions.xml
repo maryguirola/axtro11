@@ -197,8 +197,8 @@
             <field name="arch" type="xml">
                 <form>
                     <group>
-                        <field name="b_file" filename="filename"/>
-                        <field name="filename" invisible="1"/>
+                      <field name="b_file" filename="filename"/>
+                      <field name="filename" invisible="1"/>
                     </group>
                     <footer>
                         <button name="import_data_types" type="object" string="_Import" class="btn-primary"/>

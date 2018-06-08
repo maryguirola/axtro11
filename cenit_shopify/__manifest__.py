@@ -34,6 +34,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
+        'views/sale_view_jmd.xml',
     ],
     'images': [
         'static/images/banner.jpg'
