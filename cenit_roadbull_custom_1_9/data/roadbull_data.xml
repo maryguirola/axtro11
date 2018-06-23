@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_product_roadbull" model="product.product">
+            <field name="name">Roadbull</field>
+            <field name="default_code">Delivery</field>
+            <field name="type">service</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">0.0</field>
+        </record>
+        <record id="roadbull_delivery_carrier" model="delivery.carrier">
+            <field name="name">Roadbull</field>
+            <field name="fixed_price">0.0</field>
+            <field name="free_over" eval="False"/>
+            <field name="delivery_type">roadbull</field>
+            <field name="integration_level">rate</field>
+            <field name="product_id" ref="cenit_roadbull_custom_1_9.product_product_roadbull"/>
+        </record>
+    </data>
+</odoo>

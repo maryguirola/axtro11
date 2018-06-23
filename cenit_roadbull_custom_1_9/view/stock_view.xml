@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_picking_form_inherit_cenit_roadbull">
+        <field name="name">view.picking.form.inherit.cenit.roadbull</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
+        <field name="arch" type="xml">
+            <!-- Prevent the Cancel button from placing the order in Roadbull. -->
+            <button name="cancel_shipment" position="replace"></button>
+            <!-- Prevent the Send to Shipper button from placing the order in Roadbull. -->
+            <button name="send_to_shipper" position="replace"></button>
+            <group name="carrier_data" position="inside">
+                <field name="producttype_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')], 'required': [('carrier_name', '==', 'Roadbull')]}"/>
+                <field name="size_id" options="{'no_create': True, 'no_open': True}"
+                       attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')], 'required': [('carrier_name', '==', 'Roadbull')]}"/>
+                <field name="pickup_date"
+                       attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')], 'required': [('carrier_name', '==', 'Roadbull')]}"/>
+                <field name="delivery_date"
+                       attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')], 'required': [('carrier_name', '==', 'Roadbull')]}"/>
+            </group>
+            <field name="number_of_packages" position="after">
+                <field name="carrier_name" invisible="1"/>
+                <field name="service_id" options="{'no_create': True, 'no_open': True}"
+                       attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')], 'required': [('carrier_name', '==', 'Roadbull')]}"/>
+                <field name="pickup_time_slot" options="{'no_create': True, 'no_open': True}"
+                       attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')], 'required': [('carrier_name', '==', 'Roadbull')]}"/>
+                <field name="delivery_time_slot" options="{'no_create': True, 'no_open': True}"
+                       attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')], 'required': [('carrier_name', '==', 'Roadbull')]}"/>
+            </field>
+            <page name="extra" position="inside">
+                <group>
+                    <label for="remark"
+                           attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')]}"/>
+                    <field name="remark"
+                           attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')]}"/>
+                    <group>
+                        <field name="is_exhange_order"
+                               attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')]}"/>
+                    </group>
+                    <group>
+                        <field name="is_do_order" attrs="{'invisible': [('carrier_name', '!=', 'Roadbull')]}"/>
+                    </group>
+                </group>
+            </page>
+        </field>
+    </record>
+</odoo>

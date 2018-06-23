@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_roadbull_size,access_roadbull_size,model_roadbull_size,,1,0,0,0
+access_roadbull_service,access_roadbull_service,model_roadbull_service,,1,0,0,0
+access_roadbull_timeoption,access_roadbull_timeoption,model_roadbull_timeoption,,1,0,0,0
+access_roadbull_producttype,access_roadbull_producttype,model_roadbull_producttype,,1,0,0,0
