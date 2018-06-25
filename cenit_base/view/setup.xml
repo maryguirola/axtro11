@@ -117,7 +117,7 @@
                         </page>
                         <page string="Webhooks">
                             <field name="webhooks" widget="many2many_list" nolabel="1" context="{'role_id': active_id}"
-                                   attrs="{'invisible':[('webhooks','==',[])]}">
+                                   attrs="{'invisible':[('operations','!=',[])]}">
                                 <tree>
                                     <field name="namespace"/>
                                     <field name="path"/>
@@ -126,7 +126,7 @@
                             </field>
                             <field name="operations" widget="many2many_list" nolabel="1"
                                    context="{'role_id': active_id}"
-                                   attrs="{'invisible':[('operations','==',[])]}">
+                                   attrs="{'invisible':[('webhooks','!=',[])]}">
                                 <tree>
                                     <field name="namespace"/>
                                     <field name="path"/>
