@@ -24,17 +24,15 @@
     'version': '0.1.1',
     'author': 'Cenit IO',
     'website': 'https://cenit.io',
-    # ~ 'license': 'LGPL-3',
     'category': 'Extra Tools',
     'summary': 'Shopify integration.',
     'description': """
         Shopify - Odoo integration via Cenit IO
     """,
-    'depends': ['cenit_base', 'sale_management', 'stock'],
+    'depends': ['cenit_base', 'sale_stock', 'sale_management'],
     'data': [
         'security/ir.model.access.csv',
-        'data/data.xml',
-        'views/sale_view_jmd.xml',
+        'data/data.xml'
     ],
     'images': [
         'static/images/banner.jpg'
